@@ -7,9 +7,13 @@ use App\Repository\ClubRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"club:read"}},
+ *     denormalizationContext={"groups"={"club:write"}}
+ * )
  * @ORM\Entity(repositoryClass=ClubRepository::class)
  */
 class Club
@@ -18,41 +22,49 @@ class Club
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"club:read", "postcode:read", "persoon:read", "agenda:read", "team:read", "wedstrijd:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"club:read", "club:write", "postcode:read", "persoon:read", "agenda:read", "team:read", "wedstrijd:read"})
      */
     private $naam;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"club:read", "club:write", "postcode:read"})
      */
     private $straat;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"club:read", "club:write", "postcode:read"})
      */
     private $huisnr;
 
     /**
      * @ORM\OneToMany(targetEntity=Team::class, mappedBy="clubId")
+     * @Groups({"club:write", "postcode:read"})
      */
     private $clubId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Postcode::class, inversedBy="postcodeId")
+     * @Groups({"club:read", "club:write", "postcode:write"})
      */
     private $postcodeId;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="clubThuis")
+     * @Groups({"club:write", "postcode:read"})
      */
     private $wedstrijds;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="clubUit")
+     * @Groups({"club:write", "postcode:read"})
      */
     private $wedstrijdsuit;
 

@@ -7,9 +7,13 @@ use App\Repository\PostcodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"postcode:read"}},
+ *     denormalizationContext={"groups"={"postcode:write"}}
+ * )
  * @ORM\Entity(repositoryClass=PostcodeRepository::class)
  */
 class Postcode
@@ -18,26 +22,31 @@ class Postcode
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"postcode:read", "club:read", "persoon:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"postcode:read", "postcode:write", "club:read", "persoon:read"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"postcode:read", "postcode:write", "club:read", "persoon:read"})
      */
     private $gemeente;
 
     /**
      * @ORM\OneToMany(targetEntity=Club::class, mappedBy="postcodeId")
+     * @Groups({"club:write"})
      */
     private $postcodeId;
 
     /**
      * @ORM\OneToMany(targetEntity=Persoon::class, mappedBy="postcodeId")
+     * @Groups({"persoon:write"})
      */
     private $postcodeIdpersoon;
 

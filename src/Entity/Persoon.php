@@ -7,9 +7,13 @@ use App\Repository\PersoonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"persoon:read"}},
+ *     denormalizationContext={"groups"={"persoon:write"}}
+ * )
  * @ORM\Entity(repositoryClass=PersoonRepository::class)
  */
 class Persoon
@@ -18,51 +22,61 @@ class Persoon
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"persoon:read", "groep:read", "agenda:read", "team:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"persoon:read", "persoon:write", "groep:read", "agenda:read", "team:read"})
      */
     private $voornaam;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"persoon:read", "persoon:write", "groep:read", "agenda:read", "team:read"})
      */
     private $achternaam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"persoon:read", "persoon:write", "team:read"})
      */
     private $leeftijd;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"persoon:read", "persoon:write"})
      */
     private $geboortedatum;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"persoon:read", "persoon:write"})
      */
     private $straat;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"persoon:read", "persoon:write"})
      */
     private $huisnr;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="teamId")
+     * @Groups({"persoon:read", "persoon:write", "groep:read"})
      */
     private $teamId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Postcode::class, inversedBy="postcodeIdpersoon")
+     * @Groups({"persoon:read", "persoon:write"})
      */
     private $postcodeId;
 
     /**
      * @ORM\ManyToMany(targetEntity=Groep::class, inversedBy="persoons")
+     * @Groups({"persoon:read", "persoon:write", "groep:write"})
      */
     private $persoongroep;
 

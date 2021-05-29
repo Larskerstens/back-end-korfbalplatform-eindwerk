@@ -7,9 +7,13 @@ use App\Repository\GroepRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"groep:read"}},
+ *     denormalizationContext={"groups"={"groep:write"}}
+ * )
  * @ORM\Entity(repositoryClass=GroepRepository::class)
  */
 class Groep
@@ -18,21 +22,25 @@ class Groep
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"groep:read", "agenda:read", "persoon:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"groep:read", "groep:write", "agenda:read", "persoon:read"})
      */
     private $naam;
 
     /**
      * @ORM\ManyToMany(targetEntity=Persoon::class, mappedBy="persoongroep")
+     * @Groups({"groep:read", "groep:write", "agenda:read", "persoon:write"})
      */
     private $persoons;
 
     /**
      * @ORM\ManyToOne(targetEntity=Agenda::class, inversedBy="groepId")
+     * @Groups({"groep:write", "agenda:write"})
      */
     private $agenda;
 

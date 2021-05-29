@@ -7,9 +7,13 @@ use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"team:read"}},
+ *     denormalizationContext={"groups"={"team:write"}}
+ * )
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  */
 class Team
@@ -18,36 +22,43 @@ class Team
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"team:read", "persoon:read", "groep:read", "agenda:read", "training:read", "club:read", "wedstrijd:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"team:read", "team:write", "persoon:read", "groep:read", "agenda:read", "training:read", "club:read", "wedstrijd:read"})
      */
     private $naam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"team:read", "team:write"})
      */
     private $aantal;
 
     /**
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="clubId")
+     * @Groups({"team:write", "persoon:read"})
      */
     private $clubId;
 
     /**
      * @ORM\OneToMany(targetEntity=Persoon::class, mappedBy="teamId")
+     * @Groups({"team:read", "team:write", "groep:write"})
      */
     private $teamId;
 
     /**
      * @ORM\OneToMany(targetEntity=Training::class, mappedBy="teamId")
+     * @Groups({"team:write", "training:write"})
      */
     private $teamid;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="teamId")
+     * @Groups({"team:write"})
      */
     private $wedstrijds;
 

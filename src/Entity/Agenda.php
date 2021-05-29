@@ -7,9 +7,13 @@ use App\Repository\AgendaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"agenda:read"}},
+ *     denormalizationContext={"groups"={"agenda:write"}}
+ * )
  * @ORM\Entity(repositoryClass=AgendaRepository::class)
  */
 class Agenda
@@ -18,36 +22,43 @@ class Agenda
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"agenda:read", "wedstrijd:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"agenda:read", "agenda:write"})
      */
     private $datum;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"agenda:read", "agenda:write"})
      */
     private $startuur;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"agenda:read", "agenda:write"})
      */
     private $stopuur;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="agenda")
+     * @Groups({"agenda:read", "agenda:write"})
      */
     private $wedstrijdId;
 
     /**
      * @ORM\OneToMany(targetEntity=Training::class, mappedBy="agenda")
+     * @Groups({"agenda:read", "agenda:write"})
      */
     private $trainingId;
 
     /**
      * @ORM\OneToMany(targetEntity=Groep::class, mappedBy="agenda")
+     * @Groups({"agenda:read", "agenda:write"})
      */
     private $groepId;
 

@@ -5,9 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"training:read"}},
+ *     denormalizationContext={"groups"={"training:write"}}
+ * )
  * @ORM\Entity(repositoryClass=TrainingRepository::class)
  */
 class Training
@@ -16,31 +20,37 @@ class Training
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"training:read", "team:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"training:read", "training:write", "team:read"})
      */
     private $datum;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"training:read", "training:write"})
      */
     private $startuur;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"training:read", "training:write"})
      */
     private $stopuur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="teamid")
+     * @Groups({"training:read", "training:write", "agenda:read"})
      */
     private $teamId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Agenda::class, inversedBy="trainingId")
+     * @Groups({"training:write", "agenda:write"})
      */
     private $agenda;
 
