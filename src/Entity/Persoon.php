@@ -209,4 +209,9 @@ class Persoon
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->voornaam . ' ' . $this->achternaam;
+    }
 }

@@ -147,6 +147,6 @@ class Postcode
 
     public function __toString()
     {
-        return $this->gemeente;
+        return $this->code . ' ' . $this->gemeente;
     }
 }

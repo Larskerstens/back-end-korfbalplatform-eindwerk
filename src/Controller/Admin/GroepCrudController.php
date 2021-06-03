@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Groep;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class GroepCrudController extends AbstractCrudController
 {
@@ -12,14 +14,13 @@ class GroepCrudController extends AbstractCrudController
         return Groep::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('naam', 'Groepsnaam'),
+            AssociationField::new('persoons','Groepsleden')
         ];
     }
-    */
+
 }
