@@ -13,14 +13,12 @@ class HomeController extends abstractController
 {
 
     /**
-     * @Route("/")
+     * @Route("/", name="home", methods={"GET"})
      */
-    public function home(TeamRepository $teamRepository)
+    public function home()
     {
 
-        $teams = $teamRepository->findAll();
-
-        return new Response('Dit is de homepage test van de HomeController');
+        return $this->render('base.html.twig');
 
         /*
         return $this->render('team/team.html.twig', [

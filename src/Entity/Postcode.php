@@ -144,4 +144,9 @@ class Postcode
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->gemeente;
+    }
 }
