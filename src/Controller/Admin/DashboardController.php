@@ -28,7 +28,7 @@ class DashboardController extends AbstractDashboardController
     {
         $routeBuilder = $this->get(AdminUrlGenerator::class);
 
-        return $this->redirect($routeBuilder->setController(DashboardController::class)->generateUrl());
+        return $this->redirect($routeBuilder->setController(AgendaCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard

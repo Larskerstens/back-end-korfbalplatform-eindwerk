@@ -62,6 +62,11 @@ class Agenda
      */
     private $groepId;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $afspraaknaam;
+
     public function __construct()
     {
         $this->wedstrijdId = new ArrayCollection();
@@ -196,6 +201,18 @@ class Agenda
                 $groepId->setAgenda(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAfspraaknaam(): ?string
+    {
+        return $this->afspraaknaam;
+    }
+
+    public function setAfspraaknaam(?string $afspraaknaam): self
+    {
+        $this->afspraaknaam = $afspraaknaam;
 
         return $this;
     }

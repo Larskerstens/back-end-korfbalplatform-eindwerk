@@ -37,3 +37,9 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '/register', roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: '/login', roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: '/myapi', roles: [ROLE_ADMIN] }
+        - { path: '/', roles: [IS_AUTHENTICATED_FULLY, ROLE_USER] }
+
+
