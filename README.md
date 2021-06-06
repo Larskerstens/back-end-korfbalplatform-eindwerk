@@ -10,7 +10,7 @@ _Mijn Back-end eindwerk van **Syntra-AB** in de opleiding Full Stack Developer_
 -> Twig <br>
 
 #### Uren aan dit project gewerkt:
--> 28u30
+-> 30u
  
 #### Aantal koffies verwerkt:
 -> 20
