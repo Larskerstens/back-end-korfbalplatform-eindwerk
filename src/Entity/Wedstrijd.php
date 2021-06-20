@@ -26,61 +26,61 @@ class Wedstrijd
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "club:read", "team:read"})
+     * @Groups({"wedstrijd:read", "club:read", "team:read"})
      */
     private $datum;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "club:read"})
+     * @Groups({"wedstrijd:read", "club:read"})
      */
     private $startuur;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "club:read"})
+     * @Groups({"wedstrijd:read", "club:read"})
      */
     private $stopuur;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "club:read", "team:read"})
+     * @Groups({"wedstrijd:read", "club:read", "team:read"})
      */
     private $scorethuis;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "club:read", "team:read"})
+     * @Groups({"wedstrijd:read", "club:read", "team:read"})
      */
     private $scoreuit;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "club:read"})
+     * @Groups({"wedstrijd:read", "club:read"})
      */
     private $matchverloop;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="wedstrijds")
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "agenda:read", "club:read"})
+     * @Groups({"wedstrijd:read", "agenda:read", "club:read"})
      */
     private $teamId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="wedstrijds")
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "agenda:read", "club:write", "team:read"})
+     * @Groups({"wedstrijd:read", "agenda:read", "team:read"})
      */
     private $clubThuis;
 
     /**
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="wedstrijdsuit")
-     * @Groups({"wedstrijd:read", "wedstrijd:write", "agenda:read", "club:write", "team:read"})
+     * @Groups({"wedstrijd:read", "agenda:read", "team:read"})
      */
     private $clubUit;
 
     /**
      * @ORM\ManyToOne(targetEntity=Agenda::class, inversedBy="wedstrijdId")
-     * @Groups({"wedstrijd:write", "agenda:write"})
+     * @Groups({"agenda:write"})
      */
     private $agenda;
 

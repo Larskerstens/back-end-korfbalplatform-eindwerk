@@ -28,55 +28,55 @@ class Persoon
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"persoon:read", "persoon:write", "groep:read", "agenda:read", "team:read"})
+     * @Groups({"persoon:read", "groep:read", "agenda:read", "team:read"})
      */
     private $voornaam;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"persoon:read", "persoon:write", "groep:read", "agenda:read", "team:read"})
+     * @Groups({"persoon:read", "groep:read", "agenda:read", "team:read"})
      */
     private $achternaam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"persoon:read", "persoon:write", "team:read"})
+     * @Groups({"persoon:read", "team:read"})
      */
     private $leeftijd;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"persoon:read", "persoon:write"})
+     * @Groups({"persoon:read"})
      */
     private $geboortedatum;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"persoon:read", "persoon:write"})
+     * @Groups({"persoon:read"})
      */
     private $straat;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"persoon:read", "persoon:write"})
+     * @Groups({"persoon:read"})
      */
     private $huisnr;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="teamId")
-     * @Groups({"persoon:read", "persoon:write", "groep:read"})
+     * @Groups({"persoon:read", "groep:read"})
      */
     private $teamId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Postcode::class, inversedBy="postcodeIdpersoon")
-     * @Groups({"persoon:read", "persoon:write"})
+     * @Groups({"persoon:read"})
      */
     private $postcodeId;
 
     /**
      * @ORM\ManyToMany(targetEntity=Groep::class, inversedBy="persoons")
-     * @Groups({"persoon:read", "persoon:write", "groep:write"})
+     * @Groups({"persoon:read"})
      */
     private $persoongroep;
 

@@ -28,45 +28,50 @@ class Club
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"club:read", "club:write", "postcode:read", "persoon:read", "agenda:read", "team:read", "wedstrijd:read"})
+     * @Groups({"club:read", "postcode:read", "persoon:read", "agenda:read", "team:read", "wedstrijd:read"})
      */
     private $naam;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"club:read", "club:write", "postcode:read"})
+     * @Groups({"club:read", "postcode:read"})
      */
     private $straat;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"club:read", "club:write", "postcode:read"})
+     * @Groups({"club:read", "postcode:read"})
      */
     private $huisnr;
 
     /**
      * @ORM\OneToMany(targetEntity=Team::class, mappedBy="clubId")
-     * @Groups({"club:write", "postcode:read"})
+     * @Groups({"postcode:read"})
      */
     private $clubId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Postcode::class, inversedBy="postcodeId")
-     * @Groups({"club:read", "club:write", "postcode:write"})
+     * @Groups({"club:read"})
      */
     private $postcodeId;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="clubThuis")
-     * @Groups({"club:write", "postcode:read"})
+     * @Groups({"postcode:read"})
      */
     private $wedstrijds;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="clubUit")
-     * @Groups({"club:write", "postcode:read"})
+     * @Groups({"postcode:read"})
      */
     private $wedstrijdsuit;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $afkorting;
 
     public function __construct()
     {
@@ -221,5 +226,17 @@ class Club
     public function __toString()
     {
         return $this->naam;
+    }
+
+    public function getAfkorting(): ?string
+    {
+        return $this->afkorting;
+    }
+
+    public function setAfkorting(?string $afkorting): self
+    {
+        $this->afkorting = $afkorting;
+
+        return $this;
     }
 }

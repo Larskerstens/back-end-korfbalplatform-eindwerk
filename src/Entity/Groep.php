@@ -28,19 +28,19 @@ class Groep
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"groep:read", "groep:write", "agenda:read", "persoon:read"})
+     * @Groups({"groep:read", "agenda:read", "persoon:read"})
      */
     private $naam;
 
     /**
      * @ORM\ManyToMany(targetEntity=Persoon::class, mappedBy="persoongroep")
-     * @Groups({"groep:read", "groep:write", "agenda:read", "persoon:write"})
+     * @Groups({"groep:read", "agenda:read"})
      */
     private $persoons;
 
     /**
      * @ORM\ManyToOne(targetEntity=Agenda::class, inversedBy="groepId")
-     * @Groups({"groep:write", "agenda:write"})
+     * @Groups({"agenda:write"})
      */
     private $agenda;
 

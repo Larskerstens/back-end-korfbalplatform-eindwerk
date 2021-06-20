@@ -26,31 +26,31 @@ class Training
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"training:read", "training:write", "team:read"})
+     * @Groups({"training:read", "team:read"})
      */
     private $datum;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"training:read", "training:write"})
+     * @Groups({"training:read"})
      */
     private $startuur;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"training:read", "training:write"})
+     * @Groups({"training:read"})
      */
     private $stopuur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="teamid")
-     * @Groups({"training:read", "training:write", "agenda:read"})
+     * @Groups({"training:read", "agenda:read"})
      */
     private $teamId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Agenda::class, inversedBy="trainingId")
-     * @Groups({"training:write", "agenda:write"})
+     * @Groups({"agenda:write"})
      */
     private $agenda;
 

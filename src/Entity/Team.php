@@ -28,31 +28,31 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team:read", "team:write", "persoon:read", "groep:read", "agenda:read", "training:read", "club:read", "wedstrijd:read"})
+     * @Groups({"team:read", "persoon:read", "groep:read", "agenda:read", "training:read", "club:read", "wedstrijd:read"})
      */
     private $naam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"team:read", "team:write"})
+     * @Groups({"team:read"})
      */
     private $aantal;
 
     /**
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="clubId")
-     * @Groups({"team:write", "persoon:read"})
+     * @Groups({"persoon:read"})
      */
     private $clubId;
 
     /**
      * @ORM\OneToMany(targetEntity=Persoon::class, mappedBy="teamId")
-     * @Groups({"team:read", "team:write", "groep:write"})
+     * @Groups({"team:read"})
      */
     private $teamId;
 
     /**
      * @ORM\OneToMany(targetEntity=Training::class, mappedBy="teamId")
-     * @Groups({"team:write", "training:write"})
+     * @Groups({"team:write"})
      */
     private $teamid;
 

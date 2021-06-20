@@ -28,37 +28,37 @@ class Agenda
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"agenda:read", "agenda:write"})
+     * @Groups({"agenda:read"})
      */
     private $datum;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"agenda:read", "agenda:write"})
+     * @Groups({"agenda:read"})
      */
     private $startuur;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"agenda:read", "agenda:write"})
+     * @Groups({"agenda:read"})
      */
     private $stopuur;
 
     /**
      * @ORM\OneToMany(targetEntity=Wedstrijd::class, mappedBy="agenda")
-     * @Groups({"agenda:read", "agenda:write"})
+     * @Groups({"agenda:read"})
      */
     private $wedstrijdId;
 
     /**
      * @ORM\OneToMany(targetEntity=Training::class, mappedBy="agenda")
-     * @Groups({"agenda:read", "agenda:write"})
+     * @Groups({"agenda:read"})
      */
     private $trainingId;
 
     /**
      * @ORM\OneToMany(targetEntity=Groep::class, mappedBy="agenda")
-     * @Groups({"agenda:read", "agenda:write"})
+     * @Groups({"agenda:read"})
      */
     private $groepId;
 
